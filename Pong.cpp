@@ -2,6 +2,7 @@
 #include <windows.h>    //在windows环境下刷新屏幕相关
 #include <ctime>
 #include <cstdlib>
+#include <conio.h>
 
 // using namespace std;
 
