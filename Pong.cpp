@@ -23,7 +23,7 @@ int main()  //游戏主函数
     auto WIDTH{120}, HEIGHT{40};                                                            //窗口长宽
     auto ball_x{WIDTH / 2}, ball_y{HEIGHT / 2}, ball_vec_x{0}, ball_vec_y{0};               //球的x,y坐标和x,y方向速度
     auto paddle_w{4}, paddle_h{10};                                                         //挡板长宽,(横宽竖高)
-    auto paddle1_x{1}, paddle1_y{HEIGHT / 2 - paddle_h / 2}, paddle_vec{3};                 // 挡板1的x,y坐标和速度
+    auto paddle1_x{1}, paddle1_y{HEIGHT / 2 - paddle_h / 2}, paddle1_vec{3};                // 挡板1的x,y坐标和速度
     auto paddle2_x{WIDTH - paddle_w}, paddle2_y{HEIGHT / 2 - paddle_h / 2}, paddle2_vec{3}; // 挡板2的x,y坐标和速度
     auto score1{0}, score2{0};                                                              //分数
 
@@ -40,6 +40,27 @@ int main()  //游戏主函数
     while (1)   
     {
         // 1.处理事件
+        char key;
+        if (_kbhit())
+        {
+            key = _getch();
+            if ((key == 'w'|| key == 'W')&& paddle1_y > 1)    //当接受到w，且挡板1不在上边缘时
+            {
+                paddle1_y -= paddle1_vec;                       //挡板1向上移动
+            }
+            else if ((key == 's' || key == 'S') && paddle1_y + paddle1_vec + paddle_h + 1 < HEIGHT) //当接收s，且挡板1不在下边缘时
+            {
+                paddle1_y += paddle1_vec;                   //挡板1向下移动
+            }
+            else if (key == 72 && paddle2_y > 1)    // 当接受到上，且挡板2不在上边缘时
+            {
+                paddle2_y -= paddle2_vec; // 挡板2向上移动
+            }
+            else if (key == 80 && paddle2_y + paddle2_vec + paddle_h + 1 < HEIGHT) // 当接收下，且挡板2不在下边缘时
+            {
+                paddle1_y += paddle1_vec;                 //挡板1向下移动
+            }
+        }
 
         //1.5 更新数据
         ball_x += ball_vec_x;
